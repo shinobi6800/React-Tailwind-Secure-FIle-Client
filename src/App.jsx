@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import {FaFileUpload , FaFile} from "react-icons/fa"
+import {FaFileUpload , FaFile ,FaLock ,FaLockOpen} from "react-icons/fa"
 
 import './App.css'
 
@@ -7,7 +7,7 @@ function App() {
   const [file, setFile] = useState(null);
   const [uploading,setUploading] =useState(false);
   const [status,setStatus]=useState("Nothing going on here...")
-  let upload = async ()=>{
+  let uploadEnc = async ()=>{
    try{
      if(!file){
       setStatus("You didnt Select a File");
@@ -16,7 +16,7 @@ function App() {
      setStatus("Uploading File")
      let formData= new FormData();
      formData.append("file",file);
-     let req= await fetch("http://localhost:3000/securefile/upload",{method:"POST",body:formData});
+     let req= await fetch("http://localhost:3000/securefile/upload/Encrypt",{method:"POST",body:formData});
      console.log(req)
      let resp=await req.json();
      setStatus(resp.message);
@@ -32,7 +32,31 @@ function App() {
     setploading()
   }
   }
-  
+  let uploadDec = async ()=>{
+    try{
+      if(!file){
+       setStatus("You didnt Select a File");
+       return;
+      }
+      setStatus("Uploading File")
+      let formData= new FormData();
+      formData.append("file",file);
+      let req= await fetch("http://localhost:3000/securefile/upload/Decrypt",{method:"POST",body:formData});
+      console.log(req)
+      let resp=await req.json();
+      setStatus(resp.message);
+      
+    }catch(err){
+     if(err){
+       console.log(err.message);
+       setStatus(err.message)
+     }
+    
+   }finally{
+     setStatus();
+     setploading()
+   }
+   }
   return (
     <>
      <nav className='p-7  text-white font-extrabold text-2xl text-center '>SECURE FILE REDONE</nav>
@@ -40,7 +64,17 @@ function App() {
       <h1 className='font-bold text-2xl m-2 text-center '>{status}</h1>
        <div>
         <input type="file" name='file' className='bg-blue-500 p-4 text-white m-2 rounded-lg font-bold shadow-lg' onChange={(e)=>{setFile(e.target.files[0]),setStatus("You selected a file")}}/>
-         {file ? <button className='p-2 bg-green-500 text-white w-1/2 m-1 rounded-xl shadow-lg text-lg text-center font-bold' onClick={upload}>Upload</button> : ""}
+         {file ? 
+         <div className='flex justify-center p-2'>
+          <button className='p-2 bg-green-500 text-white w-1/2 m-1 rounded-xl shadow-lg text-lg text-center font-bold' onClick={uploadEnc}>
+          <span>Encrypt</span>
+           <FaLock className='inline m-1' width={7} height={7}/>
+          </button>
+          <button className='p-2 bg-red-500 text-white w-1/2 m-1 rounded-xl shadow-lg text-lg text-center font-bold' onClick={uploadDec}>
+          <span>Decrypt</span>
+           <FaLockOpen className='inline m-1' width={7} height={7}/>
+          </button>
+         </div> : "Select a file to encrypt"}
        </div>
     </section>
     <section className='w-full '>
