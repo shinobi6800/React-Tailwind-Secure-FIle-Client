@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import {FaFileUpload } from "react-icons"
+import {FaFileUpload , FaFile} from "react-icons/fa"
 
 import './App.css'
 
 function App() {
   const [file, setFile] = useState(null);
-  const [uploading,setploading] =useState(false);
+  const [uploading,setUploading] =useState(false);
   const [status,setStatus]=useState("Nothing going on here...")
   let upload = async ()=>{
    try{
@@ -27,14 +27,16 @@ function App() {
       setStatus(err.message)
     }
    
+  }finally{
+    setStatus();
+    setploading()
   }
   }
-
-
+  
   return (
     <>
      <nav className='p-7  text-white font-extrabold text-2xl text-center '>SECURE FILE REDONE</nav>
-    <section className=' m-2 bg-slate-200 p-5 rounded-lg p-2w-full h-fit flex  items-center flex-col'>
+    <section className=' m-2 bg-slate-200 p-5 rounded-lg p-2w-full h-1/2 flex  items-center flex-col'>
       <h1 className='font-bold text-2xl m-2 text-center '>{status}</h1>
        <div>
         <input type="file" name='file' className='bg-blue-500 p-4 text-white m-2 rounded-lg font-bold shadow-lg' onChange={(e)=>{setFile(e.target.files[0]),setStatus("You selected a file")}}/>
@@ -43,10 +45,13 @@ function App() {
     </section>
     <section className='w-full '>
        <div className='text-white font-bold text-lg p-3 m-5'>{file ? 
-       <div className=''>
-       <span>Upload a File</span>
-       <FaFileUpload/>
-       </div> : "Select a file" }</div>
+      <div className='flex justify-center item-center bg-slate-600 p-4 rounded-lg'>
+        <span>Upload It</span>
+        <FaFileUpload className='w-7 h-7' />
+      </div> : <div className='flex justify-center item-center bg-red-600 p-4 rounded-lg'>
+        <span>Select a File</span>
+        <FaFile className='w-7 h-7' />
+      </div> }</div>
     </section>
     </>
   )
