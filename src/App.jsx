@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import {FaFileUpload } from "react-icons"
 
 import './App.css'
 
@@ -43,7 +42,11 @@ function App() {
        </div>
     </section>
     <section className='w-full '>
-       <div className='text-white font-bold text-lg p-3 m-5'>{file ? "Upload the file ": "Select a file" }</div>
+       <div className='text-white font-bold text-lg p-3 m-5'>{file ? 
+       <div className=''>
+       <span>Upload a File</span>
+       <FaFileUpload/>
+       </div> : "Select a file" }</div>
     </section>
     </>
   )
