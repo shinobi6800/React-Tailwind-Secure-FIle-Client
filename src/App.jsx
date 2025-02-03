@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import {FaFileUpload , FaFile ,FaLock ,FaLockOpen} from "react-icons/fa"
+import {FaFileUpload , FaFile ,FaLock ,FaLockOpen ,FaSuperpowers} from "react-icons/fa"
 
 import './App.css'
 
@@ -53,15 +53,13 @@ function App() {
      }
     
    }finally{
-     setStatus();
-     setploading()
    }
    }
   return (
     <>
-     <nav className='p-7  text-white font-extrabold text-2xl text-center '>SECURE FILE REDONE</nav>
-    <section className=' m-2 bg-slate-200 p-5 rounded-lg p-2w-full h-1/2 flex  items-center flex-col'>
-      <h1 className='font-bold text-2xl m-2 text-center '>{status}</h1>
+     <nav className='p-7  text-white font-extrabold text-2xl text-center flex justify-center items-center '><span className='font-light'>SECURE FILE</span><FaSuperpowers className='inline' /></nav>
+     <section className=' m-2 bg-slate-200 p-5 rounded-lg p-2w-full h-1/2 flex  items-center flex-col'>
+      <h1 className='font-bold text-2xl m-2 text-center text-yellow-500'>{file ? setStatus("Yeah "): status}</h1>
        <div>
         <input type="file" name='file' className='bg-blue-500 p-4 text-white m-2 rounded-lg font-bold shadow-lg' onChange={(e)=>{setFile(e.target.files[0]),setStatus("You selected a file")}}/>
          {file ? 
