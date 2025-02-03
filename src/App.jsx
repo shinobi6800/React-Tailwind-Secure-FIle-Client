@@ -45,7 +45,7 @@ function App() {
     </section>
     <section className='w-full '>
        <div className='text-white font-bold text-lg p-3 m-5'>{file ? 
-      <div className='flex justify-center item-center bg-slate-600 p-4 rounded-lg'>
+      <div className='flex justify-center item-center bg-cyan-500 p-4 rounded-lg'>
         <span>Upload It</span>
         <FaFileUpload className='w-7 h-7' />
       </div> : <div className='flex justify-center item-center bg-red-600 p-4 rounded-lg'>

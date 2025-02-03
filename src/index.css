@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 body{
+  font-family: Poppins;
 display: flex;
 flex-direction: column;
 justify-items: center;
