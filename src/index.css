@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+display: flex;
+flex-direction: column;
+justify-items: center;
+align-items: center;
+text-align: center;
+width:100vw;
+height:100vh;
+background: linear-gradient(to right, #06b6d4, #3b82f6);
+}
+
+input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #06b6d4;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  input[type="file"]::-webkit-file-upload-button {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  input[type="file"]::-webkit-file-upload-button:hover {
+    background-color: #06b6d4;
+  }
+  
