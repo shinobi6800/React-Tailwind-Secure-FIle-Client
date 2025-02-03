@@ -7,6 +7,7 @@ function App() {
   const [file, setFile] = useState(null);
   const [uploading,setUploading] =useState(false);
   const [status,setStatus]=useState("Nothing going on here...")
+  const [serverResp, setServerResp]=useState("Nothing from server")
   let uploadEnc = async ()=>{
    try{
      if(!file){
@@ -44,7 +45,7 @@ function App() {
       let req= await fetch("http://localhost:3000/securefile/upload/Decrypt",{method:"POST",body:formData});
       console.log(req)
       let resp=await req.json();
-      setStatus(resp.message);
+       setServerResp(resp.message);
       
     }catch(err){
      if(err){
@@ -53,13 +54,15 @@ function App() {
      }
     
    }finally{
+     setStatus();
+     setploading()
    }
    }
   return (
     <>
      <nav className='p-7  text-white font-extrabold text-2xl text-center flex justify-center items-center '><span className='font-light'>SECURE FILE</span><FaSuperpowers className='inline' /></nav>
      <section className=' m-2 bg-slate-200 p-5 rounded-lg p-2w-full h-1/2 flex  items-center flex-col'>
-      <h1 className='font-bold text-2xl m-2 text-center text-yellow-500'>{file ? setStatus("Yeah "): status}</h1>
+      <h1 className='font-bold text-2xl m-2 text-center text-yellow-500'>{status}</h1>
        <div>
         <input type="file" name='file' className='bg-blue-500 p-4 text-white m-2 rounded-lg font-bold shadow-lg' onChange={(e)=>{setFile(e.target.files[0]),setStatus("You selected a file")}}/>
          {file ? 
@@ -73,6 +76,7 @@ function App() {
            <FaLockOpen className='inline m-1' width={7} height={7}/>
           </button>
          </div> : "Select a file to encrypt"}
+         <div className="server"><p>{serverResp}</p></div>
        </div>
     </section>
     <section className='w-full '>
